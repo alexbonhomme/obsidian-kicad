@@ -5,6 +5,8 @@ import "./kicanvas";
 export const VIEW_TYPE_KICAD = "kicad-view";
 
 export class KicadView extends FileView {
+	private embedEl: HTMLElementTagNameMap["kicanvas-embed"] | null = null;
+
 	clear() {}
 
 	getViewType() {
@@ -20,18 +22,35 @@ export class KicadView extends FileView {
 	}
 
 	async onLoadFile(file: TFile) {
-		const container = this.containerEl.children[1];
+		const container = this.containerEl;
 		container.empty();
-		container.createEl("kicanvas-embed", {
+		this.embedEl = container.createEl("kicanvas-embed", {
+			cls: "kicad-fade-in",
 			attr: {
 				src: this.app.vault.getResourcePath(file),
 				controls: "full",
 				controlslist: "nooverlay",
+				theme: this.app.isDarkMode() ? "witchhazel" : "kicad",
+			},
+		});
+
+		requestAnimationFrame(() => this.embedEl?.addClass("is-visible"));
+	}
+
+	async onOpen() {
+		const container = this.containerEl;
+		container.empty();
+		this.embedEl = container.createEl("kicanvas-embed", {
+			attr: {
+				src: "",
+				controls: "full",
+				controlslist: "nooverlay",
+				theme: this.app.isDarkMode() ? "witchhazel" : "kicad",
 			},
 		});
 	}
 
-	async onOpen() {}
-
-	async onClose() {}
+	async onClose() {
+		this.embedEl = null;
+	}
 }
