@@ -7,8 +7,6 @@ export const VIEW_TYPE_KICAD = "kicad-view";
 export class KicadView extends FileView {
 	private embedEl: HTMLElementTagNameMap["kicanvas-embed"] | null = null;
 
-	clear() {}
-
 	getViewType() {
 		return VIEW_TYPE_KICAD;
 	}
@@ -35,19 +33,6 @@ export class KicadView extends FileView {
 		});
 
 		requestAnimationFrame(() => this.embedEl?.addClass("is-visible"));
-	}
-
-	async onOpen() {
-		const container = this.containerEl;
-		container.empty();
-		this.embedEl = container.createEl("kicanvas-embed", {
-			attr: {
-				src: "",
-				controls: "full",
-				controlslist: "nooverlay",
-				theme: this.app.isDarkMode() ? "witchhazel" : "kicad",
-			},
-		});
 	}
 
 	async onClose() {
