@@ -14,7 +14,7 @@ kicanvas-embed {
 
 kicanvas-embed.kicad-fade-in {
 	opacity: 0;
-	transition: opacity 200ms ease-in;
+	transition: opacity 300ms ease-in;
 }
 
 kicanvas-embed.kicad-fade-in.is-visible {
