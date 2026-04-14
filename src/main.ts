@@ -1,4 +1,4 @@
-import { App, Editor, MarkdownView, Plugin } from 'obsidian';
+import { Plugin } from "obsidian";
 
 import { KicadView, VIEW_TYPE_KICAD } from "./kicadView";
 import KicadPluginSettingsTab from "./settingsTab";
@@ -8,11 +8,11 @@ interface PluginSettings {
 }
 
 const DEFAULT_SETTINGS: PluginSettings = {
-	mySetting: 'default'
-}
+	mySetting: "default",
+};
 
 export default class ObsidianKicad extends Plugin {
-	settings: PluginSettings;
+	settings!: PluginSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -25,12 +25,19 @@ export default class ObsidianKicad extends Plugin {
 		this.addSettingTab(new KicadPluginSettingsTab(this.app, this));
 	}
 
-	onunload() {
-
+	async onunload() {
+		// Close all open KiCad leaves before the view is unregistered.
+		this.app.workspace
+			.getLeavesOfType(VIEW_TYPE_KICAD)
+			.forEach((leaf) => leaf.detach());
 	}
 
 	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		this.settings = Object.assign(
+			{},
+			DEFAULT_SETTINGS,
+			await this.loadData(),
+		);
 	}
 
 	async saveSettings() {

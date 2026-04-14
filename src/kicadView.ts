@@ -1,11 +1,10 @@
-import { FileSystemAdapter, FileView, TFile } from "obsidian";
+import { FileView, TFile } from "obsidian";
 
-import 'kicanvas/kicanvas.js';
+import "./kicanvas";
 
 export const VIEW_TYPE_KICAD = "kicad-view";
 
 export class KicadView extends FileView {
-
 	clear() {}
 
 	getViewType() {
@@ -20,20 +19,19 @@ export class KicadView extends FileView {
 		return this.file?.basename ?? "kicad";
 	}
 
-	async onOpen() {
+	async onLoadFile(file: TFile) {
 		const container = this.containerEl.children[1];
-	}
-
-    async onLoadFile(file: TFile) {
-        const container = this.containerEl.children[1];
 		container.empty();
-        container.createEl("kicanvas-embed", {attr: {
-			"src": this.app.vault.getResourcePath(file),
-			"controls": "full",
-			"controlslist": "nooverlay"
-		}});
-    }
-
-	async onClose() {
+		container.createEl("kicanvas-embed", {
+			attr: {
+				src: this.app.vault.getResourcePath(file),
+				controls: "full",
+				controlslist: "nooverlay",
+			},
+		});
 	}
+
+	async onOpen() {}
+
+	async onClose() {}
 }

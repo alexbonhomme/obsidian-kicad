@@ -1,4 +1,4 @@
-import ObsidianKicad from "main";
+import ObsidianKicad from "./main";
 import { App, PluginSettingTab, Setting } from "obsidian";
 
 export default class KicadPluginSettingsTab extends PluginSettingTab {
