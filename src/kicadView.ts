@@ -37,7 +37,9 @@ export class KicadView extends FileView {
 		requestAnimationFrame(() => this.embedEl?.addClass("is-visible"));
 	}
 
-	async onClose() {
+	onClose() {
 		this.embedEl = null;
+
+		return super.onClose();
 	}
 }
