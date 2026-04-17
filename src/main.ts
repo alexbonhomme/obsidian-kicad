@@ -10,9 +10,6 @@ export default class ObsidianKicad extends Plugin {
 	}
 
 	async onunload() {
-		// Close all open KiCad leaves before the view is unregistered.
-		this.app.workspace
-			.getLeavesOfType(VIEW_TYPE_KICAD)
-			.forEach((leaf) => leaf.detach());
+		this.app.workspace.detachLeavesOfType(VIEW_TYPE_KICAD);
 	}
 }

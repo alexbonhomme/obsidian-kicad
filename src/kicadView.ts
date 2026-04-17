@@ -1,6 +1,6 @@
 import { FileView, TFile } from "obsidian";
 
-import "./kicanvas";
+import { kicanvasLoader } from "./kicanvasLoader";
 
 export const VIEW_TYPE_KICAD = "kicad-view";
 
@@ -20,6 +20,8 @@ export class KicadView extends FileView {
 	}
 
 	async onLoadFile(file: TFile) {
+		await kicanvasLoader();
+
 		const container = this.containerEl;
 		container.empty();
 		this.embedEl = container.createEl("kicanvas-embed", {
