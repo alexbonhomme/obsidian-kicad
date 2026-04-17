@@ -1,10 +1,9 @@
 {
-	"id": "kicad",
-	"name": "Kicad",
-	"version": "0.1.0",
+	"id": "kicad-reader",
+	"name": "KiCad Reader",
+	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Add view-only compatibility to KiCad files thanks with KiCanvas.",
-	"author": "Ferran Pujol Camins",
-	"authorUrl": "https://www.ferranpujolcamins.cat",
-	"isDesktopOnly": true
+	"description": "View KiCad files directly inside Obsidian using KiCanvas.",
+	"author": "Alexandre Bonhomme",
+	"authorUrl": "https://alexandrebonhomme.com"
 }
