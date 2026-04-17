@@ -1,49 +1,33 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import globals from "globals";
-import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import { defineConfig } from "eslint/config";
+import obsidianmd from "eslint-plugin-obsidianmd";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
+/** Rules that require @typescript-eslint parser services (see hybrid merge in eslint-plugin-obsidianmd). */
+const obsidianTypeAwareOff = {
+    "obsidianmd/no-plugin-as-component": "off",
+    "obsidianmd/no-unsupported-api": "off",
+    "obsidianmd/no-view-references-in-plugin": "off",
+    "obsidianmd/prefer-file-manager-trash-file": "off",
+    "obsidianmd/prefer-instanceof": "off",
+};
 
-export default defineConfig([globalIgnores(["**/node_modules/", "**/kicanvas/", "**/main.js"]), {
-    extends: compat.extends(
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-    ),
-
-    plugins: {
-        "@typescript-eslint": typescriptEslint,
+export default defineConfig([
+    ...obsidianmd.configs.recommended,
+    {
+        ignores: ["node_modules/**", "src/kicanvas/**", "main.js"],
     },
-
-    languageOptions: {
-        globals: {
-            ...globals.node,
+    {
+        files: ["**/*.{cjs,mjs}", "package.json"],
+        rules: obsidianTypeAwareOff,
+    },
+    // Obsidian's flat config uses `extends` with typescript-eslint; ESLint's defineConfig merge
+    // can drop parserOptions needed for type-checked rules — restore explicitly for plugin source.
+    {
+        files: ["src/**/*.ts"],
+        languageOptions: {
+            parserOptions: {
+                projectService: true,
+                tsconfigRootDir: import.meta.dirname,
+            },
         },
-
-        parser: tsParser,
-        ecmaVersion: 5,
-        sourceType: "module",
     },
-    rules: {
-        "no-unused-vars": "off",
-
-        "@typescript-eslint/no-unused-vars": ["error", {
-            args: "none",
-        }],
-
-        "@typescript-eslint/ban-ts-comment": "off",
-        "no-prototype-builtins": "off",
-        "@typescript-eslint/no-empty-function": "off",
-    },
-}]);
+]);

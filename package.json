@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-kicad",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Display KiCad files using KiCanvas.",
 	"main": "main.js",
 	"type": "module",
@@ -20,6 +20,7 @@
 		"@typescript-eslint/parser": "^8.58.2",
 		"esbuild": "^0.28.0",
 		"eslint": "^9.39.4",
+		"eslint-plugin-no-unsanitized": "^4.1.5",
 		"eslint-plugin-obsidianmd": "^0.2.3",
 		"globals": "^17.5.0",
 		"jiti": "^2.6.1",

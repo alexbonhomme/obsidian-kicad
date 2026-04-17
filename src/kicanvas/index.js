@@ -1989,3 +1989,6 @@ void main() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Nunito:wght@300;400;500;600;700&display=swap"
         crossorigin="anonymous" />`);
+
+// Side-effect bundle: mark as ES module for `import()` / TypeScript.
+export {};
