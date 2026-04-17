@@ -31,24 +31,24 @@ This plugin registers custom views for KiCad project files so you can preview sc
 ### Requirements
 
 - Node.js 18+ recommended
-- npm
+- pnpm/npm
 
 ### Setup
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Run in watch mode
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Build production bundle
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Contributors
