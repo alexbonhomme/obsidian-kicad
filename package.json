@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-kicad",
-	"version": "1.0.1",
-	"description": "Add view-only compatibility to KiCad files thanks with KiCanvas.",
+	"version": "1.0.2",
+	"description": "Display KiCad files using KiCanvas.",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
