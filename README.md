@@ -51,6 +51,11 @@ npm run dev
 npm run build
 ```
 
+## Contributors
+
+- [Ferran Pujol Camins](https://github.com/ferranpujolcamins)
+- [Alexandre Bonhomme](https://github.com/alexbonhomme)
+
 ## Manual Installation
 
 Copy the following files to:
