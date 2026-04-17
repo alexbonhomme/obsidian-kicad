@@ -1,8 +1,9 @@
 {
 	"id": "kicad-reader",
 	"name": "KiCad Reader",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
+	"isDesktopOnly": true,
 	"description": "View KiCad files directly inside Obsidian using KiCanvas.",
 	"author": "Alexandre Bonhomme",
 	"authorUrl": "https://alexandrebonhomme.com"
